@@ -80,12 +80,9 @@ public class Movement : MonoBehaviour
         {
             animator.SetBool("IsJump", true);
         }
-
-
-        if (Input.GetButtonUp("Crouch")) 
-        //if(Input.GetKey(KeyCode.Q))
+ 
+        if(Input.GetKey(KeyCode.LeftControl))
         {
-            Debug.Log("crouch");
             animator.SetBool("IsCrouch", true);
         }
         else
