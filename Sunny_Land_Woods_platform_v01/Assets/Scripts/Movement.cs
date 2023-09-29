@@ -5,55 +5,100 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float moveSpeed = 2.0f;
-    public float jumpSpeed = 5.0f;
-    private Rigidbody2D rb2D;
-    [HideInInspector]
-    public Animator animator;
+    public float moveSpeed = 3.0f;
+    public float jumpForce = 5.0f;
 
-    Vector2 movement;
+    private Rigidbody2D rb2D;
+    private Animator animator;
+    private SpriteRenderer sprite;
+
+    private float dirX = 0f;
+
+    public Transform checkGround;
+    public float groundRadius = .2f;
+    public LayerMask whatIsGround;
+    private bool onGround;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Move();
+        onGround = Physics2D.OverlapCircle(checkGround.position, groundRadius, whatIsGround);
+
+        Move();
+        UpdateState();
     }
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
 
     void Move()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Jump");
-        //movement.Normalize();
+        //onGround = Physics2D.OverlapCircle(checkGround.position, groundRadius, whatIsGround);
+        dirX = Input.GetAxisRaw("Horizontal");
+        rb2D.velocity =  new Vector2(dirX * moveSpeed, rb2D.velocity.y);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            //rb2D.velocity = 
-            animator.SetBool("IsJump", true);
+        if (Input.GetButtonDown("Jump") && onGround == true)
+        { 
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
         }
-        else
-        {
-            animator.SetBool("IsJump", false);
-            
-        }
-
-        rb2D.velocity = movement * moveSpeed;
-
     }
 
     void UpdateState()
     {
+        if (dirX > 0)
+        {
+            animator.SetBool("IsRun", true);
+            sprite.flipX = false;
+        }
+        else if (dirX < 0)
+        {
+            animator.SetBool("IsRun", true);
+            sprite.flipX = true;
+        }
+        else
+        {
+            animator.SetBool("IsRun", false);
+        }
+
+        if (Input.GetButtonDown("Jump") && onGround == true)
+        {
+            animator.SetBool("IsJump", true);
+        }
+
+        if (onGround == true)
+        {
+            animator.SetBool("IsJump", false);
+        }
+        else
+        {
+            animator.SetBool("IsJump", true);
+        }
+
+
+        if (Input.GetButtonUp("Crouch")) 
+        //if(Input.GetKey(KeyCode.Q))
+        {
+            Debug.Log("crouch");
+            animator.SetBool("IsCrouch", true);
+        }
+        else
+        {
+            animator.SetBool("IsCrouch", false);
+
+        }
+
+
+
+
+
+
 
     }
 }
