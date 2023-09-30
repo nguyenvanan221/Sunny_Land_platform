@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float moveSpeed = 3.0f;
-    public float jumpForce = 5.0f;
+    public float moveSpeed = 2.0f;
+    public float jumpForce = 4.5f;
 
     private Rigidbody2D rb2D;
     private Animator animator;
@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     public LayerMask whatIsGround;
     private bool onGround;
 
+    public Collider2D col;
 
     // Start is called before the first frame update
     void Start()
@@ -35,18 +36,21 @@ public class Movement : MonoBehaviour
 
         Move();
         UpdateState();
+        
     }
-
 
     void Move()
     {
-        //onGround = Physics2D.OverlapCircle(checkGround.position, groundRadius, whatIsGround);
         dirX = Input.GetAxisRaw("Horizontal");
         rb2D.velocity =  new Vector2(dirX * moveSpeed, rb2D.velocity.y);
 
         if (Input.GetButtonDown("Jump") && onGround == true)
         { 
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            StartCoroutine(Jump());
         }
     }
 
@@ -90,12 +94,17 @@ public class Movement : MonoBehaviour
             animator.SetBool("IsCrouch", false);
 
         }
+    }
 
-
-
-
-
-
-
+    public IEnumerator Jump()
+    {
+        float time = 0f;
+        col.enabled = false;
+        while(time < 0.3f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+        col.enabled = true;
     }
 }
