@@ -36,7 +36,12 @@ public class Movement : MonoBehaviour
 
         Move();
         UpdateState();
-        
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            StartCoroutine(Jump());
+        }
+
     }
 
     void Move()
@@ -48,10 +53,6 @@ public class Movement : MonoBehaviour
         { 
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
         }
-        if (Input.GetButtonDown("Jump"))
-        {
-            StartCoroutine(Jump());
-        }
     }
 
     void UpdateState()
@@ -59,12 +60,12 @@ public class Movement : MonoBehaviour
         if (dirX > 0)
         {
             animator.SetBool("IsRun", true);
-            sprite.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if (dirX < 0)
         {
             animator.SetBool("IsRun", true);
-            sprite.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
@@ -92,7 +93,6 @@ public class Movement : MonoBehaviour
         else
         {
             animator.SetBool("IsCrouch", false);
-
         }
     }
 
