@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     public LayerMask whatIsGround;
     private bool onGround;
 
+    //[HideInInspector]
     public Collider2D col;
 
     // Start is called before the first frame update
@@ -27,6 +28,9 @@ public class Movement : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+
+        GameObject platformObject = GameObject.FindWithTag("Platform");
+        col = platformObject.GetComponentInChildren<Collider2D>();
     }
 
     // Update is called once per frame
@@ -99,12 +103,12 @@ public class Movement : MonoBehaviour
     public IEnumerator Jump()
     {
         float time = 0f;
-        col.enabled = false;
-        while(time < 0.3f)
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
-        col.enabled = true;
+            col.enabled = false;
+            while (time < 0.3f)
+            {
+                time += Time.deltaTime;
+                yield return null;
+            }
+            col.enabled = true;
     }
 }

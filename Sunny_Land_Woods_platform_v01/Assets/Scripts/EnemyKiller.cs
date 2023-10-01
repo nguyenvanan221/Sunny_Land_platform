@@ -8,8 +8,10 @@ public class EnemyKiller : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            var enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.Kill();
+            //Animator animator = GetComponentInParent<Animator>();
+            //animator.SetTrigger("Death");
+            collision.gameObject.SetActive(false);
+
         }
     }
 }
