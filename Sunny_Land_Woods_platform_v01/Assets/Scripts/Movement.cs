@@ -29,8 +29,10 @@ public class Movement : MonoBehaviour
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
 
-        GameObject platformObject = GameObject.FindWithTag("Platform");
-        col = platformObject.GetComponentInChildren<Collider2D>();
+        //GameObject platformObject = GameObject.FindWithTag("Platform");
+        //col = platformObject.GetComponentInChildren<Collider2D>();
+        GameObject platformObject = GameObject.FindWithTag("Bough");
+        col = platformObject.GetComponent<Collider2D>();
     }
 
     // Update is called once per frame

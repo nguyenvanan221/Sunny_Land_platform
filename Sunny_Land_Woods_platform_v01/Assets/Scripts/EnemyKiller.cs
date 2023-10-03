@@ -4,14 +4,41 @@ using UnityEngine;
 
 public class EnemyKiller : MonoBehaviour
 {
+    public GameObject enemyDeath;
+    private GameObject a;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //Animator animator = GetComponentInParent<Animator>();
-            //animator.SetTrigger("Death");
-            collision.gameObject.SetActive(false);
+            //a = Instantiate(enemyDeath,transform.position, Quaternion.identity);
+            
+            
 
+            collision.gameObject.SetActive(false);
+            Debug.Log("3");
+            StartCoroutine(Wait());
+            a.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
+
+    IEnumerator Wait()
+    {
+        a = Instantiate(enemyDeath, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(10);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("2");
+            //enemyDeath.SetActive(false);
+            
+        }
+
+
+    }
+
+
 }
