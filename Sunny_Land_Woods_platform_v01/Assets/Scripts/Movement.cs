@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
-    public float moveSpeed = 2.0f;
-    public float jumpForce = 4.5f;
+    [SerializeField]
+    private float moveSpeed = 2.0f;
+    [SerializeField]
+    private float jumpForce = 4.5f;
+    [SerializeField]
+    private float hurtForce = 1f;
 
     private Rigidbody2D rb2D;
     private Animator animator;
@@ -19,9 +25,13 @@ public class Movement : MonoBehaviour
     public LayerMask whatIsGround;
     private bool onGround;
 
-    //[HideInInspector]
+    [HideInInspector]
     public Collider2D col;
 
+    enum State { idle, jump, run, crouch, hurt }
+    private State state = State.idle;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,65 +50,77 @@ public class Movement : MonoBehaviour
     {
         onGround = Physics2D.OverlapCircle(checkGround.position, groundRadius, whatIsGround);
 
-        Move();
+        if (state != State.hurt)
+        {
+            Move();
+        }
+        
         UpdateState();
-
+        
         if (Input.GetButtonDown("Jump"))
         {
             StartCoroutine(Jump());
         }
+        animator.SetInteger("state", (int) state);
 
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            state = State.hurt;
+            if (collision.transform.position.x > transform.position.x)
+            {
+                rb2D.velocity = new Vector2(-hurtForce, rb2D.velocity.y);
+            }
+            else
+            {
+                rb2D.velocity = new Vector2(hurtForce, rb2D.velocity.y);
+            }
+        }
     }
 
     void Move()
     {
         dirX = Input.GetAxisRaw("Horizontal");
-        rb2D.velocity =  new Vector2(dirX * moveSpeed, rb2D.velocity.y);
+        rb2D.velocity = new Vector2(moveSpeed * dirX, rb2D.velocity.y);
 
         if (Input.GetButtonDown("Jump") && onGround == true)
         { 
-            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);       
         }
     }
 
     void UpdateState()
     {
-        if (dirX > 0)
+        // moving left
+        if (dirX < 0)
         {
-            animator.SetBool("IsRun", true);
-            transform.localScale = new Vector3(1, 1, 1);
+            state = State.run;
+            transform.localScale = new Vector2(-1, 1);
         }
-        else if (dirX < 0)
+        // moving right
+        else if (dirX > 0)
         {
-            animator.SetBool("IsRun", true);
-            transform.localScale = new Vector3(-1, 1, 1);
+            state = State.run;
+            transform.localScale = new Vector2(1, 1);
         }
-        else
+        else if (state == State.hurt)
         {
-            animator.SetBool("IsRun", false);
+            if (Mathf.Abs(rb2D.velocity.x) < .1f)
+            {
+                state= State.idle;
+            }
         }
-
-        if (Input.GetButtonDown("Jump") && onGround == true)
-        {
-            animator.SetBool("IsJump", true);
+        //jump
+        else if (onGround != true){
+            state = State.jump;
         }
-
-        if (onGround == true)
+        else 
         {
-            animator.SetBool("IsJump", false);
-        }
-        else
-        {
-            animator.SetBool("IsJump", true);
-        }
- 
-        if(Input.GetKey(KeyCode.LeftControl))
-        {
-            animator.SetBool("IsCrouch", true);
-        }
-        else
-        {
-            animator.SetBool("IsCrouch", false);
+            state = State.idle;
         }
     }
 

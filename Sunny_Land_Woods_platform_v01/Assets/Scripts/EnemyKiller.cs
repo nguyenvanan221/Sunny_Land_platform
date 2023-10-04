@@ -11,8 +11,6 @@ public class EnemyKiller : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //a = Instantiate(enemyDeath,transform.position, Quaternion.identity);
-            
-            
 
             collision.gameObject.SetActive(false);
             Debug.Log("3");
@@ -28,17 +26,7 @@ public class EnemyKiller : MonoBehaviour
         yield return new WaitForSeconds(10);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("2");
-            //enemyDeath.SetActive(false);
-            
-        }
-
-
-    }
+    
 
 
 }
