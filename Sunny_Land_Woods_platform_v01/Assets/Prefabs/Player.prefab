@@ -178,8 +178,8 @@ MonoBehaviour:
   moveSpeed: 2
   jumpForce: 4.5
   hurtForce: 1
-  checkGround: {fileID: 0}
-  groundRadius: 0.2
+  checkGround: {fileID: 7627411089651261480}
+  groundRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -238,7 +238,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.021596104, y: -0.08141159}
+  m_Offset: {x: -0.019652724, y: -0.07298996}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -249,7 +249,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13608152, y: 0.1797751}
+  m_Size: {x: 0.15551591, y: 0.19661836}
   m_EdgeRadius: 0
 --- !u!114 &1488028205
 MonoBehaviour:
@@ -289,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7627411089651261481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.021, y: -0.132, z: 0}
+  m_LocalPosition: {x: -0.024, y: -0.142, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

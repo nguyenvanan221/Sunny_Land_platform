@@ -16744,7 +16744,7 @@ GameObject:
   - component: {fileID: 8665243120237257222}
   m_Layer: 0
   m_Name: Level 1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16913,9 +16913,9 @@ GameObject:
   - component: {fileID: 8665243121919943235}
   - component: {fileID: 8665243121919943233}
   - component: {fileID: 8665243121919943234}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bough
-  m_TagString: Untagged
+  m_TagString: Bough
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

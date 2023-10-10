@@ -49,18 +49,18 @@ public class Movement : MonoBehaviour
     void Update()
     {
         onGround = Physics2D.OverlapCircle(checkGround.position, groundRadius, whatIsGround);
-
         if (state != State.hurt)
         {
             Move();
+            if (Input.GetButtonDown("Jump"))
+            {
+                StartCoroutine(Jump());
+            }
         }
         
         UpdateState();
         
-        if (Input.GetButtonDown("Jump"))
-        {
-            StartCoroutine(Jump());
-        }
+        
         animator.SetInteger("state", (int) state);
 
     }
