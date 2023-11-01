@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ant : EnemyMoveController
+public class Ant : Enemy
 {
     private Rigidbody2D rb2D;
-    private Animator anim;
 
     public float range = 0.3f;
     public GameObject rightCheck;
     public GameObject leftCheck;
     private Transform currentPoint;
-    private void Start()
+
+    public float speed;
+    protected override void Start()
     {
+        base.Start();
         rb2D= GetComponent<Rigidbody2D>();
-        anim= GetComponent<Animator>();
         currentPoint = rightCheck.transform;
     }
 
@@ -24,7 +25,7 @@ public class Ant : EnemyMoveController
     }
 
 
-    public override void Move()
+    public void Move()
     {
         Vector2 point = currentPoint.position - transform.position;
         if (currentPoint == rightCheck.transform)
@@ -48,16 +49,4 @@ public class Ant : EnemyMoveController
             currentPoint = rightCheck.transform;
         }
     }
-
-    public void JumpedOn()
-    {
-        anim.SetTrigger("Death");
-        Death();
-    }
-
-    public void Death()
-    {
-        Destroy(this.gameObject);
-    }
-    
 }

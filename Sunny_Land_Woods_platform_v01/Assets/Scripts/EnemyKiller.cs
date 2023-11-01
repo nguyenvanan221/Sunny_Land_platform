@@ -10,8 +10,8 @@ public class EnemyKiller : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //Ant ant = collision.gameObject.GetComponent<Ant>();
-            //ant.JumpedOn();
+            Enemy ant = collision.gameObject.GetComponent<Ant>();
+            ant.JumpedOn();
         }
     }
 
