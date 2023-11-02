@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Ant : Enemy
 {
-    private Rigidbody2D rb2D;
-
     public float range = 0.3f;
     public GameObject rightCheck;
     public GameObject leftCheck;
@@ -15,13 +13,12 @@ public class Ant : Enemy
     protected override void Start()
     {
         base.Start();
-        rb2D= GetComponent<Rigidbody2D>();
         currentPoint = rightCheck.transform;
     }
 
     private void Update()
     {
-       Move();
+       //Move();
     }
 
 

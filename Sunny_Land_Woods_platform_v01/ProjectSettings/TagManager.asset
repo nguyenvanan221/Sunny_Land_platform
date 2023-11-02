@@ -46,3 +46,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2922147835
+    locked: 0
+  - name: Trees
+    uniqueID: 4219665937
+    locked: 0
+  - name: Entity
+    uniqueID: 1677912101
+    locked: 0

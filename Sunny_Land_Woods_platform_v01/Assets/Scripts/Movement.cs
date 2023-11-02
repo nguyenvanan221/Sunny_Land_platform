@@ -16,7 +16,6 @@ public class Movement : MonoBehaviour
 
     private Rigidbody2D rb2D;
     private Animator animator;
-    private SpriteRenderer sprite;
 
     public LayerMask whatIsGround;
     private float dirX = 0f;
@@ -31,7 +30,6 @@ public class Movement : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collider2D>();
     }
 
@@ -47,6 +45,17 @@ public class Movement : MonoBehaviour
         animator.SetInteger("state", (int) state);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy ant = collision.gameObject.GetComponent<Ant>();
+            ant.JumpedOn();
+            state = State.jump;
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
+            ant.Death();
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
