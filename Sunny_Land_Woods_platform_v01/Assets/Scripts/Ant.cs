@@ -9,7 +9,7 @@ public class Ant : Enemy
     public GameObject leftCheck;
     private Transform currentPoint;
 
-    public float speed;
+    public float speed = 0.5f;
     protected override void Start()
     {
         base.Start();
@@ -18,7 +18,7 @@ public class Ant : Enemy
 
     private void Update()
     {
-       //Move();
+       Move();
     }
 
 

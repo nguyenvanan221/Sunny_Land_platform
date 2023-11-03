@@ -195,8 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5002f0d6d2c0bf24c9c72d919a9ff11a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acorn: 0
-  acornText: {fileID: 0}
   moveSpeed: 1
   jumpForce: 4
   hurtForce: 3
@@ -205,6 +203,8 @@ MonoBehaviour:
     m_Bits: 256
   radius: 0.1
   pos: {fileID: 2864270436793401097}
+  acornText: {fileID: 0}
+  acorn: 0
 --- !u!1 &8508769882066542800
 GameObject:
   m_ObjectHideFlags: 0

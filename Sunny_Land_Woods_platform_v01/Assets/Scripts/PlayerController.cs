@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector]
-    public int acorn = 0;
-
-    [SerializeField]
-    private Text acornText;
     [SerializeField]
     private float moveSpeed = 1f;
     [SerializeField]
@@ -23,6 +19,11 @@ public class PlayerController : MonoBehaviour
     private float radius = 0.1f;
     [SerializeField]
     private Transform pos;
+    [SerializeField]
+    private TextMeshProUGUI acornText;
+    [HideInInspector]
+    public int acorn = 0;
+
     private bool onGround;
 
     private Rigidbody2D rb2D;
@@ -62,7 +63,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Jump trigger");
             Enemy ant = collision.gameObject.GetComponent<Ant>();
             ant.JumpedOn();
             state = State.jump;
@@ -93,7 +93,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Hurt Coll");
             state = State.hurt;
             if (collision.transform.position.x > transform.position.x)
             {
