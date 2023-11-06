@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlatformGameManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlatformGameManager : MonoBehaviour
 
     private void Awake()
     {
+        //singleton
         if (sharedInstance != null && sharedInstance != this)
         {
             Destroy(gameObject);
@@ -39,4 +41,5 @@ public class PlatformGameManager : MonoBehaviour
             cameraManager.virtualCamera.Follow = player.transform;
         }
     }
+
 }

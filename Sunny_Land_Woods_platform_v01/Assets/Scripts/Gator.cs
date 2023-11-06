@@ -8,7 +8,7 @@ public class Gator : Enemy
     float startY;
     int dir = 1;
 
-    public float speed;
+    public float speed = 0.5f;
     protected override void Start()
     {
         base.Start();

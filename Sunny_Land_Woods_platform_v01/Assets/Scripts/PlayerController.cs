@@ -12,18 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce = 4f;
     [SerializeField]
-    private float hurtForce = 3f;
+    private float hurtForce = 2.5f;
     [SerializeField]
     private LayerMask whatIsGround;
     [SerializeField]
     private float radius = 0.1f;
     [SerializeField]
     private Transform pos;
-    [SerializeField]
-    private TextMeshProUGUI acornText;
-    [HideInInspector]
-    public int acorn = 0;
-
+    
     private bool onGround;
 
     private Rigidbody2D rb2D;
@@ -63,11 +59,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Enemy ant = collision.gameObject.GetComponent<Ant>();
-            ant.JumpedOn();
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.JumpedOn();
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             state = State.jump;
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
-            ant.Death();
+            enemy.Death();
         }
 
         if (collision.gameObject.CompareTag("CanBePickUp"))
@@ -77,8 +74,8 @@ public class PlayerController : MonoBehaviour
             if (acornObject != null)
             {
                 apppear = true;
-                acorn += 1;
-                acornText.text = acorn.ToString();
+                PermanentUI.perm.acorn += 1;
+                PermanentUI.perm.acornText.text = PermanentUI.perm.acorn.ToString();
             }
 
             if (apppear)
