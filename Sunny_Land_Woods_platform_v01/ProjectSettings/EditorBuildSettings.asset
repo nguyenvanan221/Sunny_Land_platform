@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoserScene.unity
     guid: 5aec782a28d287742a5926a43f875f36
+  - enabled: 1
+    path: Assets/Scenes/WinnerScene.unity
+    guid: 2579fe4c9acdcd44285fc53fe738b5d0
   m_configObjects: {}
