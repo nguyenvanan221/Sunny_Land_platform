@@ -10,9 +10,9 @@ public class SceneChange : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            //UnlockNewLevel();
+            UnlockNewLevel();
             //winnerMenu.SetActive(true);
-            SceneManager.LoadScene("WinnerMenu");
+            SceneManager.LoadScene("WinnerScene");
 
         }
     }

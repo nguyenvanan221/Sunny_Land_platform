@@ -5,19 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject panelToLoad;
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        panelToLoad.SetActive(true);
     }
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        panelToLoad.SetActive(false);
     }
 
     public void LoadControls()
     {
-        
+        panelToLoad.SetActive(true);
+
+    }
+
+    public void LoadCredits()
+    {
+        panelToLoad.SetActive(true);
+
     }
 
     public void Quit()

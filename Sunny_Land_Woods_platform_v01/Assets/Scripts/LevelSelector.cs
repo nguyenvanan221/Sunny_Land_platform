@@ -1,26 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelSelector : MonoBehaviour
 {
     public GameObject buttonPrefab;
     public const int numButtons = 2;
-    GameObject[] buttons = new GameObject[numButtons];
+    GameObject[] buttonsObject = new GameObject[numButtons];
+    public Button[] buttons;
 
-    private void Start()
+    private void Awake()
     {
         CreateButtons();
+        LockedLevel();
     }
 
-    public void OpenScene()
-    {
-        //SceneManager.LoadScene("Level " );
-        SceneManager.LoadScene("SampleScene 1");
-
-    }
     public void CreateButtons()
     {
         if (buttonPrefab != null)
@@ -30,11 +28,34 @@ public class LevelSelector : MonoBehaviour
                 GameObject btn = Instantiate(buttonPrefab);
                 btn.name = "Button_" + i;
                 btn.transform.SetParent(gameObject.transform);
-                buttons[i] = btn;
-               
+                buttonsObject[i] = btn;
+
                 TextMeshProUGUI text = btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                 text.text = (i + 1).ToString();
+
+                buttonsObject[i].GetComponent<LevelButtons>().level = i + 1;
+                
+                if (i < buttons.Length)
+                {
+                    buttons[i] = buttonsObject[i].GetComponent<Button>();
+
+                }
+
             }
+            
+        }
+    }
+
+    public void LockedLevel()
+    {
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        for (int i=0; i < buttons.Length; i++)
+        {
+            buttons[i].interactable = false;
+        }
+        for (int i=0; i<unlockedLevel; i++)
+        {
+            buttons[i].interactable = true;
         }
     }
 
