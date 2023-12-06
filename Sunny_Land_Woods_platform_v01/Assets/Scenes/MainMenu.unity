@@ -1829,7 +1829,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 641164157}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: BackToMenu
         m_Mode: 1
@@ -2621,7 +2621,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 84199532}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: BackToMenu
         m_Mode: 1
