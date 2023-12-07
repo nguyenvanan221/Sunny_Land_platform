@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-    //public GameObject winnerMenu;
+    public GameObject winnerMenu;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             UnlockNewLevel();
-            //winnerMenu.SetActive(true);
-            SceneManager.LoadScene("WinnerScene");
-
+            winnerMenu.SetActive(true);
+            Time.timeScale= 0f;
         }
     }
 

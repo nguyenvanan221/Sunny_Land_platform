@@ -39,7 +39,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
-        PermanentUI.perm.Reset();
+        //PermanentUI.perm.Reset();
 
     }
 
@@ -48,6 +48,6 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
         pauseMenu.SetActive(false);
-        PermanentUI.perm.Reset();
+        //PermanentUI.perm.Reset();
     }
 }
